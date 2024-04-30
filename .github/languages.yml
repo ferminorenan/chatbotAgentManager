@@ -1,0 +1,22 @@
+Python:
+  - Django
+
+Django:
+  - Python
+  - JavaScript
+  - HTML
+  - CSS
+  - SQL
+
+JavaScript:
+  - HTML
+  - CSS
+
+HTML:
+  - CSS
+
+CSS:
+  - HTML
+
+SQL:
+  - Python
