@@ -34,7 +34,7 @@ class ChatbotView(APIView):
                 del sessions[requester_id]  # Remove a sessão após o término
                 return Response({'response': 'Sessão encerrada.'}, status=status.HTTP_200_OK)
             
-            return Response({'response': str(response), 'context': session.context}, status=status.HTTP_200_OK)
+            return Response({'response': str(response), 'context': session.context, 'data': session.data}, status=status.HTTP_200_OK)
         
         except Project.DoesNotExist:
             return Response({'error': 'Projeto não encontrado.'}, status=status.HTTP_404_NOT_FOUND)

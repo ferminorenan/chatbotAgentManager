@@ -16,14 +16,13 @@ class Intent(models.Model):
     events = models.JSONField(null=True, blank=True)
     training_phrases = models.JSONField(null=True, blank=True)
     response = models.TextField(null=True, blank=True)
-    action_parameters = models.ManyToManyField('ActionParameter', related_name='intents')
     def __str__(self):
         return self.name
     
 class Agent(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100, null=False, blank=False)
-    intents = models.ManyToManyField('Intent', related_name='agents', blank=True)
+    intents = models.ManyToManyField(Intent, related_name='intents', blank=True)
     default_language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, null=True, blank=True)
     default_timezone = models.CharField(max_length=50, choices=TIMEZONE_CHOICES, null=True, blank=True)
     def __str__(self):
