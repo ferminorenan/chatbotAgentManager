@@ -40,3 +40,8 @@ class ActionParameter(models.Model):
     def __str__(self):
         return f"{self.parameter_name} - {self.intent.name}"
     
+class ConversationHistory(models.Model):
+    session = models.CharField(max_length=20, null=False, blank=False)
+    conversasion = models.JSONField()
+    update_date = models.DateTimeField()
+    closed = models.BooleanField(default=False)

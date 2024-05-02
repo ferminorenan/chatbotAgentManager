@@ -25,9 +25,9 @@ class ChatbotView(APIView):
                 sessions[requester_id] = session
 
             request_data = request.data
-            session.input = request_data.get("input","").lower()
-            response = session.process_request(request_data)
-
+            session.input = request_data.get("input","")
+            response = session.process_request()
+            save_history(requester_id, session, )
             
             if response is None:
                 # Se response for None, indica que a sessão deve ser encerrada
