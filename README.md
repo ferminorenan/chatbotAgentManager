@@ -13,8 +13,8 @@ Este é um projeto em desenvolvimento que visa fornecer um gerenciador de chatbo
 
 ## Instalação
 
-1. Clone este repositório: `git clone https://github.com/seu-usuario/seu-projeto.git`
-2. Navegue até o diretório do projeto: `cd seu-projeto`
+1. Clone este repositório: `git clone ferminorenan/chatbotAgentManager`
+2. Navegue até o diretório do projeto: `cd chatbotAgentManager`
 3. Instale as dependências utilizando pip: `pip install -r requirements.txt`
 4. Execute as migrações do banco de dados: `python manage.py migrate`
 
