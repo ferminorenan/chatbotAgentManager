@@ -4,5 +4,5 @@ from .views import *
 
 
 urlpatterns = [
-    path("<str:token>/", ChatbotView.as_view(), name="chatBot"),
+    path("api/<str:token>/", ChatbotView.as_view(), name="chatBot"),
 ]

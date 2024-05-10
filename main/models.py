@@ -12,3 +12,6 @@ class Project(models.Model):
         if not self.token:
             self.token = secrets.token_hex()
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
