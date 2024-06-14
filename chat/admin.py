@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.http import HttpRequest
+from django.urls import reverse
+from django.utils.html import format_html
 from .models import Context, Intent, Agent, ActionParameter, ConversationHistory
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 
@@ -30,7 +32,7 @@ class IntentInline(NestedTabularInline):
 
 @admin.register(Agent)
 class AgentAdmin(NestedModelAdmin):
-    list_display = ["name", "project", "default_language", "default_timezone"]  
+    list_display = ["name", "project", "default_language", "default_timezone", "project_test_url"]
 
     def has_add_permission(self, request):
         return False
@@ -41,8 +43,17 @@ class AgentAdmin(NestedModelAdmin):
             return qs
         else:
             return qs.filter(project__user=request.user)
-    # Tornar obrigatório o campo project
+
+    def project_test_url(self, obj):
+        if obj.project:
+            url = reverse('chatBot', kwargs={'token': obj.project.token})
+            return format_html('<a href="{}">{}</a>', url, url)
+        return "-"
+    project_test_url.short_description = "URL de Teste do Agente"
+    
+
     fieldsets = (
         (None, {"fields": ("project", "name", "default_language", "default_timezone")}),
     )
+    readonly_fields = ["project_test_url"]
     inlines = [IntentInline, ContextInline]

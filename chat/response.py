@@ -28,7 +28,7 @@ class Session:
         self.agent = agent
         self.context = []  # Starts with "welcome" context
         self.input = ""
-        self.intents = self.agent.intents.all()
+        self.intents = self.agent.agent_intent.all()
         self.actions = None
         self.current_intent = None
         self.current_action = 0
@@ -53,6 +53,7 @@ class Session:
                 self.data = {**self.data,
                                 action.value: ""
                             }
+        self.update_context(self.current_intent.output_contexts.all())
         return self.load_data(actions.filter(order=1).first().prompts)
 
     def executing_actions(self):
@@ -134,17 +135,19 @@ class Session:
         - Loads and returns the processed response (intent response or prompts) potentially with replaced placeholders.
         - Returns None if no suitable intent is found.
         """
-        if len(self.context) == 0:
-            self.current_intent = self.intents.filter(events__icontains="'welcome'").first()
-        elif not self.executing_action:
-            self.current_intent = self.get_intent()
-            if ActionParameter.objects.filter(intent=self.current_intent):
-                return self.start_action(ActionParameter.objects.filter(intent=self.current_intent))
-        elif self.executing_action:
-            return self.executing_actions()
-
-        if self.current_intent and not self.executing_action:
-            self.update_context(self.current_intent.output_contexts.all())
-            return self.load_data(self.current_intent.response)
-        
-        return None
+        try:
+            if len(self.context) == 0:
+                self.current_intent = self.intents.filter(events__icontains="welcome").first()
+            elif not self.executing_action:
+                self.current_intent = self.get_intent()
+                if ActionParameter.objects.filter(intent=self.current_intent):
+                    return self.start_action(ActionParameter.objects.filter(intent=self.current_intent))
+            elif self.executing_action:
+                return self.executing_actions()
+            if self.current_intent and not self.executing_action:
+                self.update_context(self.current_intent.output_contexts.all())
+                return self.load_data(self.current_intent.response)
+            return None
+        except Exception as e:
+            print(e)
+            return None

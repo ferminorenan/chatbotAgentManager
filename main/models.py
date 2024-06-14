@@ -4,7 +4,7 @@ import secrets
 
 class Project(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name='projects')
     is_active = models.BooleanField(default=True)
     token = models.CharField(max_length=100, default=secrets.token_hex)
 

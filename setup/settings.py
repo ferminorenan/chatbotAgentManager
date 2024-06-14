@@ -66,7 +66,7 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.FormParser",
         "rest_framework.parsers.MultiPartParser"
-     ),
+    ),
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.QueryParameterVersioning",
     #"DEFAULT_PERMISSION_CLASSES": (
     #    "rest_framework.permissions.IsAuthenticated",
