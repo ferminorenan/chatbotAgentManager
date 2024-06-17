@@ -15,14 +15,18 @@ Este é um projeto em desenvolvimento que visa fornecer um gerenciador de chatbo
 
 1. Clone este repositório: `git clone ferminorenan/chatbotAgentManager`
 2. Navegue até o diretório do projeto: `cd chatbotAgentManager`
-3. Instale as dependências utilizando pip: `pip install -r requirements.txt`
-4. Execute as migrações do banco de dados: `python manage.py migrate`
+3. Execute o arquivo de setup para instalar as dependências e preparar o ambiente:
+
+- No Windows, execute `setup.bat`
+- No Linux e macOS:
+    - Dê permissão de execução ao arquivo com o comando: `chmod +x setup.sh`
+    - Execute no terminal: `./setup.sh`
 
 ## Uso
 
 1. Inicie o servidor: `python manage.py runserver`
-2. Acesse o painel de administração em `http://localhost:8000/admin/`
-3. Acesse a API em `http://localhost:8000/api/`
+2. Acesse o painel de administração em `http://127.0.0.1:8000/admin/`
+3. Acesse a API em `http://127.0.0.1:8000/api/`
 
 ## Contribuição
 
