@@ -10,9 +10,9 @@ class Agent(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     default_language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, null=True, blank=True)
     default_timezone = models.CharField(max_length=50, choices=TIMEZONE_CHOICES, null=True, blank=True)
-    twilio_account_sid = models.CharField(max_length=50, null=True, blank=True)
-    twilio_auth_token = models.CharField(max_length=50, null=True, blank=True)
-    twilio_whatsapp_number = models.CharField(max_length=20, null=True, blank=True)
+    whatsapp_business_api_token = models.CharField(max_length=100, null=True, blank=True)
+    whatsapp_business_phone_number = models.CharField(max_length=20, null=True, blank=True)
+
     def __str__(self):
         return self.name
 
@@ -61,6 +61,7 @@ class Intent(models.Model):
     fulfillment = models.ForeignKey(Webhook, related_name="intents_fulfillment", blank=True, null=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.name
+    
 class ActionParameter(models.Model):
     intent = models.ForeignKey(Intent, on_delete=models.CASCADE, related_name="action_parameters_set")
     order = models.IntegerField(default=1)
@@ -87,6 +88,7 @@ class Session_historic(models.Model):
     current_intent = models.ForeignKey(Intent, on_delete=models.SET_NULL, null=True, blank=True)
     executing_action = models.BooleanField(default=False)
     data = models.JSONField(default=dict)
+    closed = models.BooleanField(default=False)
     
 class Message(models.Model):
     session = models.ForeignKey(Session_historic, on_delete=models.CASCADE, related_name='messages')
