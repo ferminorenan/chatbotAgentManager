@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
         # Verifica se o superusuário 'admin' já existe
         if User.objects.filter(username='admin').exists():
-            self.stdout.write(self.style.NOTICE('O superusuário "admin" já existe. Pulando a criação.'))
+            self.stdout.write(self.style.NOTICE('O superusuário "admin" já existe.'))
         else:
             # Cria o superusuário 'admin' com senha '123'
             try:
