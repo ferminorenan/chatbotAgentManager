@@ -1,14 +1,14 @@
+import os
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
 from django.contrib.auth.models import User
 
 class Command(BaseCommand):
-    help = 'Executa migrações e cria um superusuário com username "admin" e senha "123".'
-
+    help = 'Executa migrações e cria um superusuário.'
+                
     def handle(self, *args, **kwargs):
         # Executa as migrações
         call_command('migrate')
-
         # Verifica se o superusuário 'admin' já existe
         if User.objects.filter(username='admin').exists():
             self.stdout.write(self.style.NOTICE('O superusuário "admin" já existe.'))

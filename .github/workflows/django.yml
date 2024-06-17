@@ -5,7 +5,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+env:
+  SECRET_KEY: 'django-insecure-^lj5cm+p^6g-29cyhf6a1cpx_n$2@vpq6+byqt%mpagbz)wes)'
+  DEBUG: 'true'
+  ALLOWED_HOSTS: '*'
 jobs:
   build:
 
